@@ -1,0 +1,46 @@
+.content {
+    width: 70vw;
+    border:1px solid #cecece;
+    float: left;
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+.banner {
+    display: flex;
+    width: 100%;
+    float: left!important;
+}
+
+.icon {
+    margin-top: 15vh;
+    font-weight: bold;
+}
+
+.div {
+    background-image: linear-gradient(#f8f7f7, #787777);
+    border-bottom:2px solid gray;
+}
+.div:hover{
+    background-image: linear-gradient(#f6e8e8, #fc0329);
+    border-bottom:2px solid gray;
+}
+
+.playlist:hover {
+    cursor: pointer;
+}
+
+.songs:hover{
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.loginStatus {
+    width: 15vw;
+    background-image: radial-gradient(#adadad,black);
+}
+
+.lunbo {
+    filter: blur(50px);
+    z-index: -1;
+}
