@@ -1,3 +1,18 @@
+@font-face {
+  font-family:"title";
+  src: url("./sucai/title2.ttf");
+}
+
+@font-face {
+  font-family:"title2";
+  src: url("./sucai/1.ttf");
+}
+
+@font-face {
+  font-family:"text";
+  src: url("./sucai/text.ttf");
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +25,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+audio {
+  outline: none;
 }
