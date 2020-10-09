@@ -3,17 +3,16 @@ import {Button, Flex, InputItem, Modal} from "antd-mobile";
 import {Avatar, Typography} from "antd";
 import {PlayCircleOutlined,WarningOutlined} from '@ant-design/icons'
 
-const SongRc = ({setMusicSrc}) => {
+const SongRc = ({setMusicSrc,visible,setVisible}) => {
 
     const [phone,setPhone] = useState("");
     const [password,setPassword] = useState("");
     const [cookie, setCookie] = useState(localStorage.neteaseCookie);
     const [recommend, setRecommend] = useState([]);
-    const [visible,setVisible] = useState(false)
 
     useEffect(() => {
         const recommend = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/recommend/songs`, {
+            const res = await fetch(`http://121.196.180.250:3000/recommend/songs?cookie=${localStorage.neteaseCookie}`, {
                 mode: "cors",
                 credentials: "include"
             });

@@ -1,21 +1,37 @@
 import React, {useEffect, useState} from 'react';
-import {NavBar, Icon, TabBar, Carousel, WingBlank,Modal,SearchBar,Flex} from "antd-mobile";
-import {HomeOutlined,UserOutlined,MenuOutlined,VerticalAlignTopOutlined,ArrowLeftOutlined} from '@ant-design/icons'
+import {NavBar, Icon, Carousel, WingBlank,Modal,SearchBar,Flex} from "antd-mobile";
+import {MenuOutlined,SolutionOutlined,ArrowLeftOutlined,ExportOutlined,UserOutlined} from '@ant-design/icons'
 import Mbplaylist from "./components/mbplaylist";
 import SongRc from "./components/SongRC";
-import {Route,Switch,useHistory} from 'react-router-dom'
-import {Affix,Drawer,Typography} from "antd";
+import {Link, Route, Switch, useHistory} from 'react-router-dom'
+import {Affix, Drawer, Typography, Avatar, Divider} from "antd";
 import MobilePlaylist from "./components/MobilePlaylist";
 import MobileSearch from "./components/MobileSearch";
+import MobileMy from "./components/MobileMy";
+import MobileSongDetail from "./components/MobileSongDetail";
 
 const Mobile = () => {
 
+    const [loginStatus,setLoginStatus] = useState({});
     const [banner,setBanner] = useState([]);
     const [musicSrc,setMusicSrc] = useState("");
     const [open,setOpen] = useState(false);
     const [rightOpen,setRightOpen] = useState(false);
     const [hotSearch,setHotSearch] = useState([]);
+    const [visible,setVisible] = useState(false)
     const history = useHistory();
+    const logout = async () => {
+        const res = await fetch(`http://121.196.180.250:3000/logout?cookie=${localStorage.neteaseCookie}`,{
+            mode:"cors",
+            credentials:"include"
+        });
+        const data = await res.json();
+        console.log(data)
+        if(data.code === 200) {
+            setLoginStatus({code:301});
+            localStorage.neteaseCookie = "";
+        }
+    }
 
     useEffect(()=>{
         const send = async () => {
@@ -28,9 +44,19 @@ const Mobile = () => {
             const data = await res.json();
             setHotSearch(data.data)
         }
+        const isLogin = async () => {
+            const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${localStorage.neteaseCookie}`,{
+                mode:"cors",
+                credentials:"include"
+            });
+            const data = await res.json();
+            console.log(data);
+            setLoginStatus(data)
+        }
         send();
         hotSearch();
-    },[])
+        isLogin();
+    },[localStorage.neteaseCookie])
 
     const search = (value) => {
         history.push(`/search/${value}`)
@@ -42,22 +68,70 @@ const Mobile = () => {
                 <Route exact path={'/'}>
                     <div style={{background:"white"}}>
                         <div style={{height:"50px",background:"red"}}>
-                            <NavBar
-                                mode="dark"
-                                style={{background:"red",fontFamily:"title"}}
-                                leftContent={[
-                                    <MenuOutlined key={"0"}/>
-                                ]}
-                                rightContent={[
-                                    <Icon key="1" type="search" style={{ marginRight: '16px' }} size={"sm"} onClick={()=>{setRightOpen(true)}}/>,
-                                ]}
-                                onLeftClick={()=>{setOpen(true)}}
-                            >网易云音乐</NavBar>
+                            <Affix offsetTop={0}>
+                                <NavBar
+                                    mode="dark"
+                                    style={{background:"red",fontFamily:"title"}}
+                                    leftContent={[
+                                        <MenuOutlined key={"0"}/>
+                                    ]}
+                                    rightContent={[
+                                        <Icon key="1" type="search" style={{ marginRight: '16px' }} size={"sm"} onClick={()=>{setRightOpen(true)}}/>,
+                                    ]}
+                                    onLeftClick={()=>{setOpen(true)}}
+                                >网易云音乐</NavBar>
+                            </Affix>
                             <Drawer visible={open} onClose={()=>{setOpen(false)}} placement={"left"}>
-                                <SearchBar placeholder="Search" maxLength={8} />
-                                <Flex>
-                                    <VerticalAlignTopOutlined />
-                                </Flex>
+                                {loginStatus.code === 301 &&
+                                    <div style={{marginTop:"24px"}}>
+                                        <Flex justify={"center"}>
+                                            <Avatar alt={'none'} size={80}/>
+                                        </Flex>
+                                        <Flex justify={"center"}>
+                                            <span style={{fontFamily:"text",fontSize:"30px"}}>游客账户</span>
+                                        </Flex>
+                                    </div>
+                                }
+                                {loginStatus.code === 200 &&
+                                <div style={{marginTop:"24px"}}>
+                                    <Flex justify={"center"}>
+                                        <Avatar alt={'none'} size={80} src={loginStatus.profile.avatarUrl}/>
+                                    </Flex>
+                                    <Flex justify={"center"}>
+                                        <span style={{fontFamily:"text",fontSize:"30px"}}>{loginStatus.profile.nickname}</span>
+                                    </Flex>
+                                </div>
+                                }
+                                <div style={{height:"100%",background:"whitesmoke",borderRadius:"30px",width:"100%",padding:"10vw"}}>
+                                    {loginStatus.code === 200 &&
+                                    <Link to={'/my'}>
+                                        <Flex>
+                                            <SolutionOutlined style={{fontSize:"30px"}}/>
+                                            <span style={{marginLeft:"15vw",fontSize:"20px",fontFamily:"text"}}>我的歌单</span>
+                                        </Flex>
+                                    </Link>}
+                                    {loginStatus.code === 301 &&
+                                    <Link to={'/'}>
+                                        <Flex>
+                                            <SolutionOutlined style={{fontSize:"30px"}}/>
+                                            <span style={{marginLeft:"15vw",fontSize:"20px",fontFamily:"text"}}>我的歌单(请先登录)</span>
+                                        </Flex>
+                                    </Link>}
+                                    <Divider/>
+                                    <Link to={'/'}>
+                                        <Flex onClick={()=>{setVisible(true)}}>
+                                            <UserOutlined style={{fontSize:"30px"}}/>
+                                            <span style={{marginLeft:"15vw",fontSize:"20px",fontFamily:"text"}}>登录</span>
+                                        </Flex>
+                                    </Link>
+                                    <Divider />
+                                    <Link to={'/'}>
+                                        <Flex onClick={()=>{logout()}}>
+                                            <ExportOutlined style={{fontSize:"30px"}}/>
+                                            <span style={{marginLeft:"15vw",fontSize:"20px",fontFamily:"text"}}>退出登录</span>
+                                        </Flex>
+                                    </Link>
+                                </div>
                             </Drawer>
                             <Modal visible={rightOpen}>
                                 <Flex>
@@ -99,15 +173,7 @@ const Mobile = () => {
                             </WingBlank>
                         </div>
                         <Mbplaylist />
-                        <SongRc setMusicSrc={setMusicSrc} style={{marginBottom:"2vw"}}/>
-                        <TabBar unselectedTintColor="#949494"
-                                tabBarPosition={"bottom"}
-                                tintColor="#33A3F4"
-                                barTintColor="white"
-                                style={{marginTop:"2vw"}}>
-                            <TabBar.Item title={"首页"} icon={<HomeOutlined />}/>
-                            <TabBar.Item title={"我的"} icon={<UserOutlined />}/>
-                        </TabBar>
+                        <SongRc setMusicSrc={setMusicSrc} visible={visible} setVisible={setVisible} style={{marginBottom:"2vw"}}/>
                     </div>
                 </Route>
                 <Route path={'/playlist/:id'}>
@@ -116,9 +182,15 @@ const Mobile = () => {
                 <Route path={'/search/:value'}>
                     <MobileSearch setMusicSrc={setMusicSrc}/>
                 </Route>
+                <Route path={'/my'}>
+                    <MobileMy />
+                </Route>
+                <Route path={'/song/:id'}>
+                    <MobileSongDetail setMusicSrc={setMusicSrc}/>
+                </Route>
             </Switch>
             <Affix offsetBottom={0}>
-                <audio src={musicSrc} autoPlay controls style={{width:"100%"}}/>
+                <audio src={musicSrc} autoPlay controls style={{width:"100%"}} id={'audio'}/>
             </Affix>
         </div>
     );

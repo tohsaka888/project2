@@ -71,3 +71,28 @@
 .am-search-cancel{
     color: white!important;
 }
+
+.am-tag-normal::before {
+    border: none!important;
+}
+
+.homepage {
+    background-size: cover;
+    filter: brightness(0.5);
+    position: relative;
+}
+
+.homepageText {
+    position: absolute;
+    top: 0;
+}
+
+.ant-drawer-body {
+    padding: 0px!important;
+}
+
+.musicbg {
+    filter: blur(30px);
+    position: relative;
+    background-position: center;
+}

@@ -8,7 +8,6 @@ import {indexContext} from "./Context";
 
 const MusicDetail = ({setMusicUrl,loginStatus,cookie}) => {
 
-
     const [comment,setComment] = useState({})
     const [newComment, setNewComment] = useState({comment: null});
     const [contentText, setContentText] = useState("");

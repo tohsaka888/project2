@@ -49,21 +49,23 @@ const MobilePlaylist = ({setMusicSrc}) => {
             <div style={{borderRadius:"30px",background:"white",paddingTop:"5vw",width:"100%"}}>
                 {playlist.tracks && playlist.tracks.map((item,index)=>{
                     return (
-                        <Flex key={index} justify={"center"} alignContent={"center"}
-                              style={{border: "1px solid #F9F9F9", marginTop: "2vh"}}>
-                            <Avatar src={item.al.picUrl} size={"large"}/>
-                            <span style={{fontFamily: "text", width: "40%", marginLeft: "4vw",fontSize:"16px"}}>{item.name}</span>
-                            <span style={{width:"20%",overflow:"hidden",maxHeight:"5vw"}}>
+                       <Link to={`/song/${item.id}`} key={index}>
+                           <Flex justify={"center"} alignContent={"center"}
+                                 style={{border: "1px solid #F9F9F9", marginTop: "2vh"}}>
+                               <Avatar src={item.al.picUrl} size={"large"}/>
+                               <span style={{fontFamily: "text", width: "40%", marginLeft: "4vw",fontSize:"16px"}}>{item.name}</span>
+                               <span style={{width:"20%",overflow:"hidden",maxHeight:"5vw"}}>
                                 {item.ar && item.ar.map((item,index)=>{
                                     return (
                                         <Typography.Text key={index} style={{fontSize:"6px"}}>{item.name+' '}</Typography.Text>
                                     )
                                 })}
                             </span>
-                            <PlayCircleOutlined style={{color: "red",float:"right",fontSize:"16px"}} onClick={() => {
-                                getSongs(item.id)
-                            }}/>
-                        </Flex>
+                               <PlayCircleOutlined style={{color: "red",float:"right",fontSize:"16px"}} onClick={() => {
+                                   getSongs(item.id)
+                               }}/>
+                           </Flex>
+                       </Link>
                     )
                 })}
             </div>
