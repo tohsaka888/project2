@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Avatar, Button, Form, Input, Layout, Menu, Modal, Popover} from 'antd'
 import './header.css'
 import {TaobaoCircleFilled, MessageOutlined, SettingOutlined, ImportOutlined, HomeOutlined} from "@ant-design/icons"
@@ -13,6 +13,10 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
     const {Search} = Input
     const {Header} = Layout;
     const {Item} = Menu;
+
+    useEffect(()=>{
+        follow();
+    },[])
 
     const login = async () => {
         const res = await fetch(`http://121.196.180.250:3000/login/cellphone?phone=${phone}&password=${password}`, {
@@ -63,6 +67,14 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
         history.push(`/mymusic/${data.playlist[0].id}`)
     }
 
+    const follow = async () => {
+        const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${cookie}`);
+        const data = await res.json();
+        const res1 = await fetch(`http://121.196.180.250:3000/user/follows?uid=${data.profile.userId}`);
+        const data1 = await res1.json();
+        history.push(`/myfriend/${data.profile.userId}/message/${data1.follow[0].userId}`)
+    }
+
     const content = (
         <div>
             <Button size="small" icon={<HomeOutlined/>} style={{border: "none", fontSize: '12px'}}>我的主页</Button><br/>
@@ -100,17 +112,15 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
                         style={{fontFamily: "title", fontSize: "20px", color: "white",marginRight:"20px"}}>网易云音乐</span>
                     <Item key="/"><Link to='/'><span>发现音乐</span></Link></Item>
                     <Item key="mymusic" onClick={mymusic}><span>我的音乐</span></Item>
-                    <Item key="friend"><span>朋友</span></Item>
-                    <Item key="shop"><span>商城</span></Item>
-                    <Item key="musician"><span>音乐人</span></Item>
+                    {loginStatus.profile && <Item key="friend" onClick={()=>{follow()}}><span>朋友</span></Item>}
                 </Menu>
-                <div style={{marginLeft: "20px"}}>
+                <div style={{marginLeft:"1vw"}}>
                     <Search placeholder="音乐/视频/电台/用户 "
                             onSearch={(value) => {
                                 search(value);
                                 history.push(`/search/${value}`);
                             }}
-                            enterButton style={{width: "250px", verticalAlign: "middle", display: "block"}}/>
+                            style={{width: "400px",verticalAlign:"middle"}}/>
                 </div>
                 <Button shape="round" style={{
                     marginLeft: "20px",

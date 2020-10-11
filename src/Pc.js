@@ -10,6 +10,7 @@ import My from "./components/My";
 import {playContext} from "./components/Context";
 import {indexContext} from "./components/Context";
 import MusicDetail from "./components/musicDetail";
+import Friend from "./components/Friend";
 
 function Pc() {
 
@@ -159,9 +160,11 @@ function Pc() {
                                 <Route path={'/musicdetail/:id'}>
                                     <MusicDetail setMusicUrl={setMusicSrc} loginStatus={loginState} cookie={cookie}/>
                                 </Route>
+                                <Route path={'/myfriend/:id'}>
+                                    <Friend />
+                                </Route>
                             </Switch>
-                            <div style={{height: "20px"}}/>
-                            <Affix offsetBottom={0} className="audio" style={{zIndex: "100"}}>
+                            <Affix offsetBottom={0} className="audio" style={{zIndex: "100",marginTop:"20px"}}>
                                 <div style={{
                                     background: "black",
                                     height: "70px",

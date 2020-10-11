@@ -96,3 +96,8 @@
     position: relative;
     background-position: center;
 }
+
+.ChatApp {
+    background-color: whitesmoke!important;
+    box-shadow: 5px 5px 5px #CECECE;
+}
