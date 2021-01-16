@@ -10,14 +10,14 @@ const MobilePlaylist = ({setMusicSrc}) => {
     const [playlist,setPlaylist] = useState({})
 
     const getSongs = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`);
         const data = await res.json();
         setMusicSrc(data.data[0].url);
     }
 
     useEffect(()=>{
         const playlistDetail = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${id}`,{
+            const res = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${id}`,{
                 mode:"cors",
                 credentials:"include"
             });

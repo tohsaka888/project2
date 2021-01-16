@@ -6,7 +6,7 @@ import {Link, useParams} from 'react-router-dom'
 const Search = ({songData, setMusicSrc, cookie, setSongData}) => {
 
     const play = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}&cookie=${cookie}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}&cookie=${cookie}`);
         const data = await res.json();
         setMusicSrc(data.data[0].url);
     }
@@ -15,7 +15,7 @@ const Search = ({songData, setMusicSrc, cookie, setSongData}) => {
     const {keywords} = useParams();
 
     const search = async (value) => {
-        const res = await fetch(`http://121.196.180.250:3000/search?keywords=${value}&cookie=${cookie}`);
+        const res = await fetch(`http://139.196.141.233:3000/search?keywords=${value}&cookie=${cookie}`);
         const data = await res.json();
         console.log(data)
         setSongData(data.result.songs);
@@ -23,7 +23,7 @@ const Search = ({songData, setMusicSrc, cookie, setSongData}) => {
 
     useEffect(()=>{
         const search = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/search?keywords=${keywords}`);
+            const res = await fetch(`http://139.196.141.233:3000/search?keywords=${keywords}`);
             const data = await res.json();
             setSongData(data.result.songs);
         }

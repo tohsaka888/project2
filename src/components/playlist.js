@@ -26,13 +26,13 @@ const PlayList = ({setMusicUrl, comment, margin, myId = null, myCookie = null}) 
     });
 
     const play1 = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`);
         const data = await res.json();
         setMusicUrl(data.data[0].url);
     }
 
     const sendComment = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/comment?t=1&type=2&id=${play.id}&content=${contentText}&cookie=${cookie ? cookie : myCookie}`);
+        const res = await fetch(`http://139.196.141.233:3000/comment?t=1&type=2&id=${play.id}&content=${contentText}&cookie=${cookie ? cookie : myCookie}`);
         const data = await res.json();
         setNewComment(data);
     }
@@ -42,7 +42,7 @@ const PlayList = ({setMusicUrl, comment, margin, myId = null, myCookie = null}) 
             setPlay(value.playlist)
         })
         const login = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${cookie ? cookie : myCookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/login/status?cookie=${cookie ? cookie : myCookie}`, {
                 credentials: "include",
                 mode: "cors"
             });

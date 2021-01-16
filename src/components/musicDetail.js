@@ -28,7 +28,7 @@ const MusicDetail = ({setMusicUrl,loginStatus,cookie}) => {
         })
 
         const musicComment = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/comment/music?id=${id}`,{
+            const res = await fetch(`http://139.196.141.233:3000/comment/music?id=${id}`,{
                 mode:"cors"
             });
             const data = await res.json();
@@ -36,7 +36,7 @@ const MusicDetail = ({setMusicUrl,loginStatus,cookie}) => {
         }
 
         const detail = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/song/detail?ids=${id}`,{
+            const res = await fetch(`http://139.196.141.233:3000/song/detail?ids=${id}`,{
                 mode:"cors"
             });
             const data = await res.json();
@@ -44,7 +44,7 @@ const MusicDetail = ({setMusicUrl,loginStatus,cookie}) => {
             setImgurl(data.songs[0].al.picUrl)
         }
         const lyric = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/lyric?id=${id}`,{
+            const res = await fetch(`http://139.196.141.233:3000/lyric?id=${id}`,{
                 mode:"cors"
             });
             const data = await res.json();
@@ -61,7 +61,7 @@ const MusicDetail = ({setMusicUrl,loginStatus,cookie}) => {
     },[id]);
 
     const play1 = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`,{
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`,{
             mode:"cors",
         });
         const data = await res.json();
@@ -69,7 +69,7 @@ const MusicDetail = ({setMusicUrl,loginStatus,cookie}) => {
     }
 
     const sendComment = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/comment/music?t=1&type=0&id=${id}&content=${contentText}&cookie=${cookie}`,{
+        const res = await fetch(`http://139.196.141.233:3000/comment/music?t=1&type=0&id=${id}&content=${contentText}&cookie=${cookie}`,{
             mode:"cors"
         });
         const data = await res.json();

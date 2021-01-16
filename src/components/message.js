@@ -14,13 +14,13 @@ const Message = () => {
     const [user,setUser] = useState({});
 
     const userDetail = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/user/detail?uid=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/user/detail?uid=${id}`);
         const data = await res.json();
         setUser(data);
     }
 
     const historyMessage = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/msg/private/history?uid=${id}&cookie=${localStorage.neteaseCookie}`,{
+        const res = await fetch(`http://139.196.141.233:3000/msg/private/history?uid=${id}&cookie=${localStorage.neteaseCookie}`,{
             credentials:"include",
             mode:"cors"
         });

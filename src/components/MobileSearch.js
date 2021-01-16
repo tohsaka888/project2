@@ -12,7 +12,7 @@ const MobileSearch = ({setMusicSrc}) => {
 
     useEffect(()=>{
         const search = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/search?keywords=${value}`);
+            const res = await fetch(`http://139.196.141.233:3000/search?keywords=${value}`);
             const data = await res.json();
             setSongs(data.result.songs);
         }
@@ -24,7 +24,7 @@ const MobileSearch = ({setMusicSrc}) => {
     }
 
     const getSongs = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`);
         const data = await res.json();
         setMusicSrc(data.data[0].url);
     }

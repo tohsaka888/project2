@@ -10,7 +10,7 @@ const Friend = () => {
     const [follows,setFollows] = useState([]);
 
     const follow = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/user/follows?uid=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/user/follows?uid=${id}`);
         const data = await res.json();
         setFollows(data.follow);
     }

@@ -19,7 +19,7 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
     },[])
 
     const login = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/login/cellphone?phone=${phone}&password=${password}`, {
+        const res = await fetch(`http://139.196.141.233:3000/login/cellphone?phone=${phone}&password=${password}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -30,19 +30,20 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
         });
         const data = await res.json();
         setCookie(data.cookie);
+        console.log(data.cookie);
         localStorage.neteaseCookie = data.cookie;
         setVisible(false);
         setLoginStatus(data);
     }
 
     const search = async (value) => {
-        const res = await fetch(`http://121.196.180.250:3000/search?keywords=${value}`);
+        const res = await fetch(`http://139.196.141.233:3000/search?keywords=${value}`);
         const data = await res.json();
         setSongData(data.result.songs);
     }
 
     const logout = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/logout?cookie=${cookie}`);
+        const res = await fetch(`http://139.196.141.233:3000/logout?cookie=${cookie}`);
         const data = await res.json();
         if(data.code === 200) {
             setLoginStatus({code:301});
@@ -52,27 +53,29 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
     }
 
     const mymusic = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/user/playlist?uid=${loginStatus.profile.userId}&cookie=${cookie}`);
+        const res = await fetch(`http://139.196.141.233:3000/user/playlist?uid=${loginStatus.profile.userId}&cookie=${cookie}`);
         const data = await res.json();
         setMymusic(data);
-        const res2 = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${data.playlist[0].id}&cookie=${cookie}`, {
+        const res2 = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${data.playlist[0].id}&cookie=${cookie}`, {
             credentials: "include",
             mode: "cors"
         });
         const data2 = await res2.json();
         setPlay(data2.playlist);
-        const res1 = await fetch(`http://121.196.180.250:3000/comment/playlist?id=${data.playlist[0].id}&cookie=${cookie}`);
+        const res1 = await fetch(`http://139.196.141.233:3000/comment/playlist?id=${data.playlist[0].id}&cookie=${cookie}`);
         const data1 = await res1.json();
         setComment(data1);
         history.push(`/mymusic/${data.playlist[0].id}`)
     }
 
     const follow = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${cookie}`);
+        const res = await fetch(`http://139.196.141.233:3000/login/status?cookie=${cookie}`);
         const data = await res.json();
-        const res1 = await fetch(`http://121.196.180.250:3000/user/follows?uid=${data.profile.userId}`);
-        const data1 = await res1.json();
-        history.push(`/myfriend/${data.profile.userId}/message/${data1.follow[0].userId}`)
+        if (data.profile !==undefined) {
+            const res1 = await fetch(`http://139.196.141.233:3000/user/follows?uid=${data.profile.userId}`);
+            const data1 = await res1.json();
+            history.push(`/myfriend/${data.profile.userId}/message/${data1.follow[0].userId}`)
+        }
     }
 
     const content = (
@@ -135,7 +138,7 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
                 {loginStatus.code === 200 && loginStatus &&
                 <Popover content={content}><Avatar src={loginStatus.profile.avatarUrl}
                                                    style={{marginLeft: "20px"}}/></Popover>}
-                <Modal visible={visible} onCancel={() => setVisible(false)} onOk={login} title="登录">
+                <Modal visible={visible} onCancel={() => setVisible(false)} onOk={()=>{login()}} title="登录">
                     <Form>
                         <Form.Item label="手机号" labelCol={{span: 5}} wrapperCol={16} name="phone"><Input
                             style={{width: "300px"}} onChange={(event) => {

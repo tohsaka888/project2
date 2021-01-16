@@ -13,20 +13,20 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
     const history = useHistory();
 
     const playlistDetail = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${id}`, {
+        const res = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${id}`, {
             credentials: "include",
             mode: "cors"
         });
         const data = await res.json();
         setPlay(data.playlist);
-        const res1 = await fetch(`http://121.196.180.250:3000/comment/playlist?id=${id}`);
+        const res1 = await fetch(`http://139.196.141.233:3000/comment/playlist?id=${id}`);
         const data1 = await res1.json();
         setComment(data1);
         history.push(`/playlist/${id}`);
     }
 
     const sign = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/daily_signin?type=1&cookie=${cookie}`,{
+        const res = await fetch(`http://139.196.141.233:3000/daily_signin?type=1&cookie=${cookie}`,{
             mode : "cors",
         });
         const data = await res.json();
@@ -181,7 +181,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                 }} tabBarStyle={{marginLeft: "auto", marginRight: "auto"}} tabBarGutter={40} animated>
                     <TabPane tab="1" key={1}>
                         <div style={{display: "flex"}}>
-                            {weekData.slice(0, 5).map((item, index) => {
+                            {weekData && weekData.slice(0, 5).map((item, index) => {
                                 return (
                                     <div style={{marginLeft: "30px"}} key={index}>
                                         <img className="playlist" src={item.picUrl} style={{
@@ -206,7 +206,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                     </TabPane>
                     <TabPane tab="2" key={2}>
                         <div style={{display: "flex"}}>
-                            {weekData.slice(5, 10).map((item, index) => {
+                            {weekData && weekData.slice(5, 10).map((item, index) => {
                                 return (
                                     <div style={{marginLeft: "30px"}} key={index}>
                                         <img className="playlist" src={item.picUrl} style={{
@@ -231,7 +231,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                     </TabPane>
                     <TabPane tab="3" key={3}>
                         <div style={{display: "flex"}}>
-                            {weekData.slice(10, 15).map((item, index) => {
+                            {weekData && weekData.slice(10, 15).map((item, index) => {
                                 return (
                                     <div style={{marginLeft: "30px"}} key={index}>
                                         <img className="playlist" src={item.picUrl} style={{
@@ -256,7 +256,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                     </TabPane>
                     <TabPane tab="4" key={4}>
                         <div style={{display: "flex"}}>
-                            {weekData.slice(15, 20).map((item, index) => {
+                            {weekData && weekData.slice(15, 20).map((item, index) => {
                                 return (
                                     <div style={{marginLeft: "30px"}} key={index}>
                                         <img className="playlist" src={item.picUrl} style={{
@@ -281,7 +281,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                     </TabPane>
                     <TabPane tab="5" key={5}>
                         <div style={{display: "flex"}}>
-                            {weekData.slice(20, 25).map((item, index) => {
+                            {weekData && weekData.slice(20, 25).map((item, index) => {
                                 return (
                                     <div style={{marginLeft: "30px"}} key={index}>
                                         <img className="playlist" src={item.picUrl} style={{
@@ -306,7 +306,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                     </TabPane>
                     <TabPane tab="6" key={6}>
                         <div style={{display: "flex"}}>
-                            {weekData.slice(25, 30).map((item, index) => {
+                            {weekData &&weekData.slice(25, 30).map((item, index) => {
                                 return (
                                     <div style={{marginLeft: "30px"}} key={index}>
                                         <img className="playlist" src={item.picUrl} style={{

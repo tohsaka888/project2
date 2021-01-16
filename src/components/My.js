@@ -13,17 +13,17 @@ const My = ({mymusic, comment, setMusicUrl, setComment, setMymusic, cookie}) => 
 
     useEffect(() => {
         const myList = async () => {
-            const res1 = await fetch(`http://121.196.180.250:3000/comment/playlist?id=${id}`);
+            const res1 = await fetch(`http://139.196.141.233:3000/comment/playlist?id=${id}`);
             const data1 = await res1.json();
             setComment(data1);
         }
         const Mymusic = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${cookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/login/status?cookie=${cookie}`, {
                 credentials: "include",
                 mode: "cors"
             });
             const data = await res.json();
-            const res1 = await fetch(`http://121.196.180.250:3000/user/playlist?uid=${data.profile.userId}&cookie=${cookie}`);
+            const res1 = await fetch(`http://139.196.141.233:3000/user/playlist?uid=${data.profile.userId}&cookie=${cookie}`);
             const data1 = await res1.json();
             setMymusic(data1);
         }

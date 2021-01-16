@@ -19,14 +19,14 @@ const MobileSongDetail = ({setMusicSrc}) => {
             setChange(audio.currentTime);
         })
         const detail = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/song/detail?ids=${id}`);
+            const res = await fetch(`http://139.196.141.233:3000/song/detail?ids=${id}`);
             const data = await res.json();
             setSongs(data.songs[0]);
             setImgurl(data.songs[0].al.picUrl)
         }
         detail();
         const lyric = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/lyric?id=${id}`,{
+            const res = await fetch(`http://139.196.141.233:3000/lyric?id=${id}`,{
                 mode:"cors"
             });
             const data = await res.json();
@@ -41,7 +41,7 @@ const MobileSongDetail = ({setMusicSrc}) => {
     }, [id])
 
     const getSongs = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`);
         const data = await res.json();
         setMusicSrc(data.data[0].url);
     }

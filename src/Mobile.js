@@ -21,7 +21,7 @@ const Mobile = () => {
     const [visible,setVisible] = useState(false)
     const history = useHistory();
     const logout = async () => {
-        const res = await fetch(`http://121.196.180.250:3000/logout?cookie=${localStorage.neteaseCookie}`,{
+        const res = await fetch(`http://musicapi.leanapp.cn/logout?cookie=${localStorage.neteaseCookie}`,{
             mode:"cors",
             credentials:"include"
         });
@@ -35,17 +35,17 @@ const Mobile = () => {
 
     useEffect(()=>{
         const send = async () => {
-            const res = await fetch("http://121.196.180.250:3000/banner", {mode: "cors"});
+            const res = await fetch("http://139.196.141.233:3000/banner", {mode: "cors"});
             const data = await res.json();
             setBanner(data.banners);
         }
         const hotSearch = async () => {
-            const res = await fetch("http://121.196.180.250:3000/search/hot/detail");
+            const res = await fetch("http://139.196.141.233:3000/search/hot/detail");
             const data = await res.json();
             setHotSearch(data.data)
         }
         const isLogin = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${localStorage.neteaseCookie}`,{
+            const res = await fetch(`http://139.196.141.233:3000/login/status?cookie=${localStorage.neteaseCookie}`,{
                 mode:"cors",
                 credentials:"include"
             });

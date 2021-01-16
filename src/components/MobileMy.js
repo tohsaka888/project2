@@ -11,15 +11,15 @@ const MobileMy = () => {
 
     useEffect(() => {
         const userDetail = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${localStorage.neteaseCookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/login/status?cookie=${localStorage.neteaseCookie}`, {
                 mode: "cors",
                 credentials: "include"
             });
             const data = await res.json();
-            const res1 = await fetch(`http://121.196.180.250:3000/user/detail?uid=${data.profile.userId}`);
+            const res1 = await fetch(`http://139.196.141.233:3000/user/detail?uid=${data.profile.userId}`);
             const data1 = await res1.json();
             setUser(data1);
-            const res2 = await fetch(`http://121.196.180.250:3000/user/playlist?uid=${data.profile.userId}`, {
+            const res2 = await fetch(`http://139.196.141.233:3000/user/playlist?uid=${data.profile.userId}`, {
                 mode: "cors",
                 credentials: "include"
             });

@@ -5,7 +5,7 @@ import {PlayCircleOutlined} from '@ant-design/icons'
 const Toplist = ({toplist1, toplistSongs, toplistSongs1, toplistSongs2, setMusicUrl}) => {
 
     const play1 = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`);
         const data = await res.json();
         setMusicUrl(data.data[0].url);
     }

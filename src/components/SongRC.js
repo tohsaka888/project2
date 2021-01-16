@@ -12,7 +12,7 @@ const SongRc = ({setMusicSrc,visible,setVisible}) => {
 
     useEffect(() => {
         const recommend = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/recommend/songs?cookie=${localStorage.neteaseCookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/recommend/songs?cookie=${localStorage.neteaseCookie}`, {
                 mode: "cors",
                 credentials: "include"
             });
@@ -25,14 +25,14 @@ const SongRc = ({setMusicSrc,visible,setVisible}) => {
     }, [cookie])
 
     const getSongs = async (id) => {
-        const res = await fetch(`http://121.196.180.250:3000/song/url?id=${id}`);
+        const res = await fetch(`http://139.196.141.233:3000/song/url?id=${id}`);
         const data = await res.json();
         setMusicSrc(data.data[0].url);
     }
 
     const login = async () => {
         setVisible(false)
-        const res = await fetch(`http://121.196.180.250:3000/login/cellphone?phone=${phone}&password=${password}`, {
+        const res = await fetch(`http://139.196.141.233:3000/login/cellphone?phone=${phone}&password=${password}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -90,6 +90,7 @@ const SongRc = ({setMusicSrc,visible,setVisible}) => {
                     </div>
                     <Button type={"primary"} style={{marginTop:"2vh",borderRadius:"20px"}} onClick={()=>{login()}}>登录</Button>
                 </Modal>
+                <audio autoPlay url="http://m8.music.126.net/20210116171451/d86b469072e03e69d924703794d342b7/ymusic/0fd6/4f65/43ed/a8772889f38dfcb91c04da915b301617.mp3"/>
             </div>
             }
         </div>

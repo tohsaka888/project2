@@ -6,7 +6,7 @@ const Chatmain = ({message,id,user}) => {
     const { appendMsg, setTyping,messages } = useMessages(message);
 
     const send = async (content) => {
-        const res = await fetch(`http://121.196.180.250:3000/send/text?user_ids=${id}&msg=${content}&cookie=${localStorage.neteaseCookie}`,{
+        const res = await fetch(`http://139.196.141.233:3000/send/text?user_ids=${id}&msg=${content}&cookie=${localStorage.neteaseCookie}`,{
             credentials:"include",
             mode:"cors"
         });
@@ -46,7 +46,7 @@ const Chatmain = ({message,id,user}) => {
                 navbar={{ title: user.profile.nickname }}
                 messages={messages}
                 renderMessageContent={renderMessageContent}
-                onSend={handleSend}/>}
+                onSend={handleSend}/>
         </div>
     );
 };

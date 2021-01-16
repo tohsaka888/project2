@@ -9,7 +9,7 @@ const Mbplaylist = () => {
 
     useEffect(() => {
         const gedan = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/top/playlist?limit=12`, {mode: "cors"});
+            const res = await fetch(`http://139.196.141.233:3000/top/playlist?limit=12`, {mode: "cors"});
             const data = await res.json();
             setPlaylist(data.playlists);
         }

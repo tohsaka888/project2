@@ -43,62 +43,62 @@ function Pc() {
     }
 
     const playlistDetail = async (id, cookie) => {
-        const res = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${id}&cookie=${cookie}`,{mode:"cors"});
+        const res = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${id}&cookie=${cookie}`,{mode:"cors"});
         const data = await res.json();
         return data;
     }
 
     useEffect(() => {
-
         const send = async () => {
-            const res = await fetch("http://121.196.180.250:3000/banner", {mode: "cors"});
+            const res = await fetch(`http://139.196.141.233:3000/banner`, {mode: "cors"});
             const data = await res.json();
             setBanner(data.banners);
+            console.log(data.banners);
         }
 
         const gedan = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/top/playlist?limit=12&cookie=${cookie}`, {mode: "cors"});
+            const res = await fetch(`http://139.196.141.233:3000/top/playlist?limit=12&cookie=${cookie}`, {mode: "cors"});
             const data = await res.json();
             setPlaylist(data.playlists);
         }
 
         const toplist = async () => {
-            const res = await fetch("http://121.196.180.250:3000/toplist/artist?type=1", {mode: "cors"});
+            const res = await fetch("http://139.196.141.233:3000/toplist/artist?type=1", {mode: "cors"});
             const data = await res.json();
             setArtist(data.list.artists);
-            const res1 = await fetch("http://121.196.180.250:3000/toplist/artist?type=2", {mode: "cors"});
+            const res1 = await fetch("http://139.196.141.233:3000/toplist/artist?type=2", {mode: "cors"});
             const data1 = await res1.json();
             setArtist1(data1.list.artists);
-            const res2 = await fetch("http://121.196.180.250:3000/toplist/artist?type=3", {mode: "cors"});
+            const res2 = await fetch("http://139.196.141.233:3000/toplist/artist?type=3", {mode: "cors"});
             const data2 = await res2.json();
             setArtist2(data2.list.artists);
-            const res3 = await fetch("http://121.196.180.250:3000/toplist/artist?type=4", {mode: "cors"});
+            const res3 = await fetch("http://139.196.141.233:3000/toplist/artist?type=4", {mode: "cors"});
             const data3 = await res3.json();
             setArtist3(data3.list.artists);
-            const res4 = await fetch("http://121.196.180.250:3000/toplist");
+            const res4 = await fetch("http://139.196.141.233:3000/toplist");
             const data4 = await res4.json();
             setToplist(data4.list.slice(0, 3));
-            const res5 = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${data4.list[0].id}`);
+            const res5 = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${data4.list[0].id}`);
             const data5 = await res5.json();
             setToplistSongs(data5.playlist.tracks.slice(0, 10));
-            const res6 = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${data4.list[1].id}`);
+            const res6 = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${data4.list[1].id}`);
             const data6 = await res6.json();
             setToplistSongs1(data6.playlist.tracks.slice(0, 10));
-            const res7 = await fetch(`http://121.196.180.250:3000/playlist/detail?id=${data4.list[2].id}`);
+            const res7 = await fetch(`http://139.196.141.233:3000/playlist/detail?id=${data4.list[2].id}`);
             const data7 = await res7.json();
             setToplistSongs2(data7.playlist.tracks.slice(0, 10));
         }
         const login = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/login/status?cookie=${cookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/login/status?cookie=${cookie}`, {
                 credentials: "include",
                 mode: "cors"
             });
             const data = await res.json();
-            await fetch(`http://121.196.180.250:3000/login/refresh?cookie=${cookie}`, {credentials: "include", mode: "cors"});
+            await fetch(`http://139.196.141.233:3000/login/refresh?cookie=${cookie}`, {credentials: "include", mode: "cors"});
             setLoginState(data);
         }
         const newAlbum = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/top/album?limit=30&cookie=${cookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/top/album?limit=30&cookie=${cookie}`, {
                 mode: "cors",
                 credentials: "include"
             });
@@ -107,7 +107,7 @@ function Pc() {
         }
 
         const like = async () => {
-            const res = await fetch(`http://121.196.180.250:3000/recommend/resource?cookie=${cookie}`, {
+            const res = await fetch(`http://139.196.141.233:3000/recommend/resource?cookie=${cookie}`, {
                 mode: "cors",
                 credentials: "include"
             });
