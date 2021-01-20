@@ -14,9 +14,9 @@ const Header = ({visible, setVisible, setUserLike, loginStatus, setSongData, set
     const {Header} = Layout;
     const {Item} = Menu;
 
-    useEffect(()=>{
-        follow();
-    },[])
+    // useEffect(()=>{
+    //     follow();
+    // },[])
 
     const login = async () => {
         const res = await fetch(`http://139.196.141.233:3000/login/cellphone?phone=${phone}&password=${password}`, {

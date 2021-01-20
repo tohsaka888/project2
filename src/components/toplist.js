@@ -28,7 +28,7 @@ const Toplist = ({toplist1, toplistSongs, toplistSongs1, toplistSongs2, setMusic
                             }}>
                                 <Divider/>
                                 {item.name}
-                                <Button style={{float: "right"}} icon={<PlayCircleOutlined/>} type="primary"
+                                <Button style={{float: "right"}} icon={<PlayCircleOutlined />} type="primary"
                                         shape="circle" size='small' onClick={()=>{play1(item.id)}}/>
                             </List.Item>
                         )

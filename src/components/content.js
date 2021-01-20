@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Carousel, Col, Layout, Menu, Row, Tabs, Collapse, Avatar, Button, message} from "antd"
 import {EnvironmentOutlined, LeftOutlined, RightOutlined, UserOutlined} from "@ant-design/icons"
 import {useHistory} from 'react-router-dom'
@@ -40,6 +40,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
         }
     }
 
+
     return (
         <div>
             <div style={{overflow: "hidden",height:"40vh"}}>
@@ -53,7 +54,7 @@ const Content = ({setSongUrl, toplistSongs2, toplistSongs1, toplistSongs, toplis
                     {banner.map((item, index) => {
                         return (
                             <div key={index} style={{position:"relative"}}>
-                                <img src={item.imageUrl} alt={index} style={{width:"53vw",top:0,zIndex:"10",position:"absolute",marginLeft:"15vw"}}/>
+                                <img src={item.imageUrl} alt={index} style={{width:"53vw",top:0,zIndex:"10",position:"absolute",marginLeft:"15vw",height:"40vh"}}/>
                                 <img src={item.imageUrl} alt={index} style={{width:"100%",position:"relative"}} className={'lunbo'}/>
                             </div>
                         )
