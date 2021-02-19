@@ -54,7 +54,7 @@ const PlayList = ({setMusicUrl, comment, margin, myId = null, myCookie = null}) 
 
     return (
         <div style={{
-            marginTop: "20px",
+            marginTop: "67px",
             marginBottom: "20px",
             backgroundColor: "white",
             marginLeft: margin,

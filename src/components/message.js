@@ -1,52 +1,52 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useParams} from 'react-router-dom'
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import Chatmain from "./chatmain";
 
 const Message = () => {
-
-    const message = useRef([
-        {
-            type: 'text',
-            content: { text: '主人好，我是智能助理，你的贴心小助手~' },
-        },
-    ]);
-    const {id} = useParams();
-    const [user,setUser] = useState({});
-
-    const userDetail = async () => {
-        const res = await fetch(`http://139.196.141.233:3000/user/detail?uid=${id}`);
-        const data = await res.json();
-        setUser(data);
-    }
-
-    const historyMessage = async () => {
-        const res = await fetch(`http://139.196.141.233:3000/msg/private/history?uid=${id}&cookie=${localStorage.neteaseCookie}`,{
-            credentials:"include",
-            mode:"cors"
-        });
-        const data = await res.json();
-        data.msgs.map((item,index) => {
-            const textmsg = JSON.parse(item.msg);
-            message.current[index] =  {type:"text",content:{text:textmsg.msg}};
-        })
-    }
-
-    useEffect(()=>{
-        message.current[0].content.text = 'music';
-        userDetail();
-        historyMessage();
-    },[id])
-
-
-    return (
-        <div style={{height:"90vh"}}>
-            {console.log(message.current)}
-            <div style={{height:"90vh",width:"56vw"}}>
-                {user.profile && message.current[0].content.text!=='music'&&
-                <Chatmain id={id} user={user} message={message.current}/>}
-            </div>
-        </div>
+  const message = useRef([]);
+  const { id } = useParams();
+  const [user, setUser] = useState({});
+  const userDetail = async () => {
+    const res = await fetch(
+      `http://139.196.141.233:3000/user/detail?uid=${id}`
     );
+    const data = await res.json();
+    setUser(data);
+  };
+  const historyMessage = async () => {
+    message.current = [];
+    const res = await fetch(
+      `http://139.196.141.233:3000/msg/private/history?uid=${id}&cookie=${localStorage.neteaseCookie}`,
+      {
+        credentials: "include",
+        mode: "cors",
+      }
+    );
+    const data = await res.json();
+    data.msgs.map((item, index) => {
+      const msg = JSON.parse(item.msg).msg;
+      const temp = {
+        position: "right",
+        type: "text",
+        content: { text: msg },
+        //   user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+      };
+      message.current.push(temp);
+    });
+  };
+
+  useEffect(() => {
+    userDetail();
+    historyMessage();
+  }, [id]);
+
+  return (
+    <div style={{ height: "90vh", width: "55vw" }}>
+      {user.profile && message.current.length !== 0 && (
+        <Chatmain id={id} user={user} message={message.current} />
+      )}
+    </div>
+  );
 };
 
 export default Message;

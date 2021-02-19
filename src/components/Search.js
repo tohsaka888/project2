@@ -32,7 +32,7 @@ const Search = ({songData, setMusicSrc, cookie, setSongData}) => {
 
     return (
         <div style={{
-            marginTop: "20px",
+            marginTop: "87px",
             marginBottom: "20px",
             backgroundColor: "white",
             marginLeft: "15vw",
