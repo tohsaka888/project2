@@ -25,7 +25,7 @@ const Chatmain = ({ id, user }) => {
         position: "right",
       });
 
-      setTyping(true);
+      // setTyping(true);
 
       send(val);
     }

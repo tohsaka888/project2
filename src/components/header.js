@@ -43,7 +43,6 @@ const Header = ({
   // useEffect(()=>{
   //     follow();
   // },[])
-
   const login = async () => {
     const res = await fetch(
       `http://139.196.141.233:3000/login/cellphone?phone=${phone}&password=${password}`,
@@ -123,7 +122,12 @@ const Header = ({
       );
     }
   };
-
+  const myTrends = () => {
+    const userId = loginStatus.profile.userId;
+    if (userId !== undefined) {
+      history.push(`/trends/${loginStatus.profile.userId}`);
+    }
+  };
   const content = (
     <div>
       <Button
@@ -208,7 +212,9 @@ const Header = ({
           <Item key="mymusic" onClick={mymusic}>
             <span>我的音乐</span>
           </Item>
-          <Item key="trends">我的动态</Item>
+          <Item key="trends" onClick={myTrends}>
+            我的动态
+          </Item>
           <Item key="playlist">歌单</Item>
           {loginStatus.profile && (
             <Item
