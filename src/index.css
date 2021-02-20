@@ -30,3 +30,13 @@ code {
 audio {
   outline: none;
 }
+
+.Bubble.text {
+  padding: 5px 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  float: left;
+  text-align: left;
+}

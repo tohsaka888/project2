@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Chat, { Bubble, useMessages } from "@chatui/core";
+import { chatContext } from "./Context";
 
-const Chatmain = ({ message, id, user, setMessage }) => {
-    console.log(message)
+const Chatmain = ({ id, user }) => {
+  const { message } = useContext(chatContext);
   const { appendMsg, setTyping, messages } = useMessages(message);
+  console.log(messages)
   const send = async (content) => {
     const res = await fetch(
       `http://139.196.141.233:3000/send/text?user_ids=${id}&msg=${content}&cookie=${localStorage.neteaseCookie}`,
@@ -16,7 +18,6 @@ const Chatmain = ({ message, id, user, setMessage }) => {
   };
 
   function handleSend(type, val) {
-    console.log(type);
     if (type === "text" && val.trim()) {
       appendMsg({
         type: "text",
