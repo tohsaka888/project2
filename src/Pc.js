@@ -12,6 +12,7 @@ import { indexContext } from "./components/Context";
 import MusicDetail from "./components/musicDetail";
 import Friend from "./components/Friend";
 import Trends from "./components/trends";
+import PlaylistMain from "./components/playlistMain";
 
 function Pc() {
   const [play, setPlay] = useState({ tracks: [] });
@@ -246,8 +247,11 @@ function Pc() {
                 <Route path={"/myfriend/:id"}>
                   <Friend />
                 </Route>
-                <Route path={'/trends/:userId'}>
-                    <Trends />
+                <Route path={"/trends/:userId"}>
+                  <Trends />
+                </Route>
+                <Route path={"/playlistMain"}>
+                  <PlaylistMain />
                 </Route>
               </Switch>
               <Affix

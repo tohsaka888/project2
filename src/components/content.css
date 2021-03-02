@@ -44,3 +44,17 @@
     filter: blur(50px);
     z-index: -1;
 }
+
+.playlistImg:hover {
+    opacity: 0.5;
+}
+
+.playlistText:hover {
+    font-weight: 900;
+    color: #fc0329;
+    opacity: 0.8;
+}
+
+.playlistText {
+    margin-bottom: 15px;
+}

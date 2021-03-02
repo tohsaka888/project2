@@ -215,7 +215,7 @@ const Header = ({
           <Item key="trends" onClick={myTrends}>
             我的动态
           </Item>
-          <Item key="playlist">歌单</Item>
+          <Item key="playlist"><Link to={'playlistMain'}>歌单</Link></Item>
           {loginStatus.profile && (
             <Item
               key="friend"
